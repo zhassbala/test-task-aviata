@@ -1,0 +1,22 @@
+@import '_vars.scss';
+
+.filter-wrapper{
+	background-color: $filtercard_bg;
+	display: inline-grid;
+	padding: 0.7rem;
+	margin: 0.5rem;
+
+	span.header{
+		font-weight: bold;
+	}
+	
+	ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+	}
+
+	input[type='checkbox']{
+			margin-right: .5rem;
+	}
+}

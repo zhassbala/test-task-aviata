@@ -1,0 +1,9 @@
+@import '_vars.scss';
+
+#app{
+    background-color: $bg_main;
+}
+
+section{
+    display: inline-grid;
+}
