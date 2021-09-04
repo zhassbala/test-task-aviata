@@ -1,15 +1,23 @@
 <template>
-  <div class="home">
-    <!-- <result-card/> -->
+  <div class="home container">
     <section class="filters">
-      <!-- <span>Filters: {{this.$store.state.filters}}</span> -->
-      <BaseFilter Header="Опции тарифа" :FilterList="filtersTariff" FilterType="tariff"/>
-      <BaseFilter Header="Авиакомпании" :FilterList="this.$store.state.airlines" FilterType="companies"/>
+      <BaseFilter Header="Опции тарифа" 
+      :FilterList="filtersTariff" 
+      FilterType="tariff"
+      ref="tariffFilter"
+      />
+      <BaseFilter Header="Авиакомпании" 
+      :FilterList="Object.keys(this.$store.state.airlinesReversed)" 
+      FilterType="companies"
+      ref="companiesFilter"
+      />
+      <button class="remove-filters" @click="removeAllFilters">Сбросить все фильтры</button>
     </section>
 
     <section class="results">
-      <div class="" v-for="flight in this.$store.getters.flights" :key="flight.id">
         <ResultCard 
+        v-for="flight in this.$store.getters.flights"
+        :key="flight.id"
         :img_code="flight.validating_carrier" 
         :currency="flight.currency"
         :company="this.$store.state.airlines[flight.validating_carrier]"
@@ -17,8 +25,11 @@
         :origin_code="getOriginCode(flight)"
         :destination_code="getDestinationCode(flight)"
         :refundable="flight.refundable"
+        :travel_time="flight.best_time"
+        :luggage="Object.keys(flight.services)[0]"
+        :arr_date="flight.itineraries[0][0].arr_date"
+        :dep_date="flight.itineraries[0][0].dep_date"
         />
-      </div>
     </section>
     
   </div>
@@ -26,7 +37,6 @@
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
 import ResultCard from '@/components/ResultCard.vue';
 import BaseFilter from '@/components/BaseFilter.vue'
 
@@ -35,7 +45,6 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Home',
   components: {
-    // HelloWorld,
     ResultCard,
     BaseFilter,
   },
@@ -49,12 +58,14 @@ export default {
       let code = flight.itineraries[0][0].segments
       code = code[code.length-1].dest_code
       return code
+    },
+    removeAllFilters(){
+      this.$refs.tariffFilter.clear()
+      this.$refs.companiesFilter.clear()
     }
   },
-  mounted() {
+  beforeMount() {
     this.$store.dispatch('init')
-    console.log('homepage mounted!')
-    console.log(this.$store.state.airlines)
   },
   data() {
     return {
@@ -68,7 +79,7 @@ export default {
   },
   computed: {
     ...mapGetters['flights'],
-  }
+  },
 }
 </script>
 

@@ -1,9 +1,37 @@
 @import '_vars.scss';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
+}
 
 #app{
-    background-color: $bg_main;
+  background-color: $bg_main;
+  min-height: 110vh;
+  font-family: 'Open Sans', sans-serif;
 }
 
 section{
-    display: inline-grid;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.home{
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+
+	section.filters{
+		button.remove-filters{
+			border: none;
+			background-color: rgba(255, 255, 255, 0);
+      text-align: left;
+			color: $link_blue;
+		}
+	}
 }

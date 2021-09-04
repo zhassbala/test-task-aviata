@@ -3,20 +3,48 @@
 .filter-wrapper{
 	background-color: $filtercard_bg;
 	display: inline-grid;
-	padding: 0.7rem;
+	padding-top: 0.7rem;
 	margin: 0.5rem;
+	border-radius: 6px;
 
 	span.header{
 		font-weight: bold;
+		margin-left: .7rem;
+	}
+
+	span.filter-clear-img{
+		width: 20px;
+        height: 20px;
+        background: url("../assets/clearFilters.svg") no-repeat;
+        display: inline-block;
+		float: right;
+		margin: 0 .5rem;
+		cursor: pointer;
+	}
+
+	span.filter-clear-img:hover{
+		background: url("../assets/clearFiltersHover.svg") no-repeat;
 	}
 	
-	ul{
+	ul.filter-list{
     list-style: none;
     margin: 0;
     padding: 0;
+
+		li{
+			padding: 0.7rem;
+		}
+
+		li:hover{
+			background-color: $filtercard_bg_hover;
+		}
 	}
 
 	input[type='checkbox']{
-			margin-right: .5rem;
+		margin-right: .5rem;
+	}
+	input[type='checkbox']:checked{
+		// margin-right: 1.5rem;
+		background-color: $green;
 	}
 }
